@@ -19,11 +19,7 @@ const MyApp = ({ Component, pageProps }) => {
           <S.Main>
             <Component {...pageProps} />
           </S.Main>
-          <S.Footer>
-            2021 by{' '}
-            <img src="/nalarauga_eye.svg" alt="Nalarauga Logo" height="20px" />
-            <img src="/nalarauga_text.svg" alt="Nalarauga Logo" height="20px" />
-          </S.Footer>
+
           <Modal />
         </S.Container>
       </Store>
@@ -32,3 +28,11 @@ const MyApp = ({ Component, pageProps }) => {
 };
 
 export default MyApp;
+
+/*
+  <S.Footer>
+            2021 by{' '}
+            <img src="/nalarauga_eye.svg" alt="Nalarauga Logo" height="20px" />
+            <img src="/nalarauga_text.svg" alt="Nalarauga Logo" height="20px" />
+          </S.Footer>
+          */

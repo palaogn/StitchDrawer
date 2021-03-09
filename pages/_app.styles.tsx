@@ -6,11 +6,10 @@ export const Container = styled.div`
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
     'header'
-    'main'
-    'footer';
+    'main';
 `;
 
 export const Header = styled.div`
@@ -29,6 +28,7 @@ export const Main = styled.div`
   padding: 5rem 0;
 `;
 
+/*
 export const Footer = styled.div`
   grid-area: footer;
   width: 100%;
@@ -36,7 +36,7 @@ export const Footer = styled.div`
   border-top: 1px solid #eaeaea;
   text-align: center;
   padding-top: 20px;
-`;
+`; */
 
 export const GlobalStyle = createGlobalStyle`
 html,

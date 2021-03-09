@@ -1,10 +1,11 @@
-import { Matrix } from '.';
+import { Stitch } from '.';
 
 export type MatrixContextState = {
   matrixWidth: number;
   matrixHeight: number;
   stitchSize: number;
-  matrixData: Matrix;
+  matrixData: Stitch[];
+  matrixBackgroundData: Stitch[];
 };
 
 export type MatrixContextDispatcher = {
