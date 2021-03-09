@@ -1,30 +1,24 @@
-import styled from 'styled-components';
+import React from 'react';
 
-const Container = styled.div`
-  padding: 20px;
-  border-top: 1px solid #eaeaea;
-  border-right: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
-`;
-
-const Tool = styled.div`
-  height: 50px;
-  width: 50px;
-  border: 1px solid #eaeaea;
-`;
-
-const ToolTitle = styled.p`
-  font-size: 16px;
-`;
+import { ColorPicker, StitchPicker, MatrixSettings } from './Tools';
+import * as S from './Toolbar.styles';
 
 const Toolbar = () => {
   return (
-    <Container>
-      <Tool></Tool>
-      <Tool></Tool>
-      <Tool></Tool>
-      <Tool></Tool>
-    </Container>
+    <S.Container>
+      <S.Tool>
+        <S.ToolTitle>Color:</S.ToolTitle>
+        <ColorPicker />
+      </S.Tool>
+      <S.Tool>
+        <S.ToolTitle>Stitch:</S.ToolTitle>
+        <StitchPicker />
+      </S.Tool>
+      <S.Tool>
+        <S.ToolTitle>Canvas:</S.ToolTitle>
+        <MatrixSettings />
+      </S.Tool>
+    </S.Container>
   );
 };
 
