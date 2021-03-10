@@ -34,3 +34,11 @@ export const AdditionalColorWrapper = styled.div`
   font-size: 24px;
   line-height: 40px;
 `;
+
+export const IconWrapper = styled.div`
+  transition: all 0.2s ease-in-out;
+
+  :hover {
+    transform: scale(1.3);
+  }
+`;

@@ -26,4 +26,9 @@ export const CloseWrapper = styled.div`
 export const ModalTitle = styled.div`
   font-size: 30px;
   margin-bottom: 10px;
+  padding: 0 60px;
+`;
+
+export const ModalSubTitle = styled.div`
+  padding: 0 60px;
 `;

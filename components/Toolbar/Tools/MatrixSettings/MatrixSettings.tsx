@@ -21,7 +21,7 @@ const MatrixSettings = () => {
     <S.Container>
       <S.AdditionalColorWrapper>
         <S.Rectangle color="white" onClick={openMatrixSettingsModal}>
-          +
+          <S.IconWrapper>+</S.IconWrapper>
         </S.Rectangle>
       </S.AdditionalColorWrapper>
       <S.StitchWrapper>

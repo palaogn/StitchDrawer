@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 
 import * as S from './MatrixSettings.styles';
+import * as MS from '../../ModalContent.styles';
 import { Input, Button } from '../../../../';
 import { MatrixDataContext, ModalContext } from '../../../../../store';
 
@@ -32,7 +33,8 @@ const MatrixSettings = () => {
 
   return (
     <S.Container>
-      <div>Here you can change Matrix settings</div>
+      <MS.ModalTitle>Matrix Settings</MS.ModalTitle>
+      <MS.ModalSubTitle>Here you can change Matrix settings</MS.ModalSubTitle>
       <Input
         label="Matrix Height"
         value={updatedMatrixHeight}

@@ -4,12 +4,13 @@ import styled from 'styled-components';
 export const borderColor = '#eaeaea';
 
 export const Container = styled.div`
+  max-width: 100px;
   padding: 10px;
   // #eaeaea
   border-top: 2px solid ${borderColor};
   border-right: 2px solid ${borderColor};
   border-bottom: 2px solid ${borderColor};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  //  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: white;
 `;
 

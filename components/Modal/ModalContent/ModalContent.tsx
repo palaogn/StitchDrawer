@@ -1,13 +1,13 @@
-import React, { ReactChild, useContext } from 'react';
+import React, { useContext } from 'react';
 import * as S from './ModalContent.styles';
 import { CrossStitch } from '../..';
 import { ModalContext } from '../../../store';
-import { ColorPicker, StitchPicker, MatrixSettings } from './Content';
-
-type ModalContentType = {
-  title: string;
-  children: ReactChild;
-};
+import {
+  ColorPicker,
+  StitchPicker,
+  MatrixSettings,
+  ClearCanvas,
+} from './Content';
 
 const ModalContent = () => {
   const modalState = useContext(ModalContext.State);
@@ -20,26 +20,13 @@ const ModalContent = () => {
   const renderContent = () => {
     switch (modalState.modalContentType) {
       case 'ColorPicker':
-        return (
-          <>
-            <S.ModalTitle>Choose a color</S.ModalTitle>
-            <ColorPicker />
-          </>
-        );
+        return <ColorPicker />;
       case 'StitchPicker':
-        return (
-          <>
-            <S.ModalTitle>Choose a stitch</S.ModalTitle>
-            <StitchPicker />
-          </>
-        );
+        return <StitchPicker />;
       case 'MatrixSettings':
-        return (
-          <>
-            <S.ModalTitle>Matrix Settings</S.ModalTitle>
-            <MatrixSettings />
-          </>
-        );
+        return <MatrixSettings />;
+      case 'ClearCanvas':
+        return <ClearCanvas />;
       default:
         return null;
     }

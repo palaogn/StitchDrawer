@@ -2,19 +2,19 @@ import React, { createContext, Context, useReducer } from 'react';
 import { MatrixContextDispatcher, MatrixContextState, Stitch } from '../types';
 
 const initialStitchSize = 20;
-const initialMatrixHeight = 30;
-const initialMatrixWidth = 30;
+const initialMatrixHeight = 50;
+const initialMatrixWidth = 50;
 
 const initialMatrixData: Stitch[] = [
-  { color: 'red', stitch: 'Cross', position: { row: 1, column: 1 } },
-  { color: 'blue', stitch: 'Cross', position: { row: 1, column: 3 } },
-  { color: 'red', stitch: 'Cross', position: { row: 1, column: 5 } },
-  { color: 'blue', stitch: 'Cross', position: { row: 3, column: 1 } },
-  { color: 'red', stitch: 'Cross', position: { row: 3, column: 3 } },
-  { color: 'blue', stitch: 'Cross', position: { row: 3, column: 5 } },
+  { color: 'pink', stitch: 'Cross', position: { row: 1, column: 1 } },
+  { color: '#00807d', stitch: 'Cross', position: { row: 1, column: 3 } },
+  { color: 'pink', stitch: 'Cross', position: { row: 1, column: 5 } },
+  { color: '#00807d', stitch: 'Cross', position: { row: 3, column: 1 } },
+  { color: 'pink', stitch: 'Cross', position: { row: 3, column: 3 } },
+  { color: '#00807d', stitch: 'Cross', position: { row: 3, column: 5 } },
   //
   { color: 'pink', stitch: 'Cross', position: { row: 15, column: 14 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 16, column: 15 } },
+  { color: '', stitch: 'Cross', position: { row: 16, column: 15 } },
   { color: '#00807d', stitch: 'Cross', position: { row: 16, column: 13 } },
   { color: '#00807d', stitch: 'Cross', position: { row: 17, column: 12 } },
   { color: '#00807d', stitch: 'Cross', position: { row: 17, column: 16 } },
@@ -50,13 +50,21 @@ const initiateMatrixBackground = (
   matrixWidth: number,
   matrixHeight: number
 ) => {
-  const emptyStitch = { color: 'white', stitch: 'Cross' };
+  const crossStitch = { color: 'white', stitch: 'Cross' };
+  const leftStitch = { color: 'white', stitch: 'LeftLine' };
+  const topStitch = { color: 'white', stitch: 'TopLine' };
+  const rightStitch = { color: 'white', stitch: 'RightLine' };
+  const bottomStitch = { color: 'white', stitch: 'BottomLine' };
   let backgroundMatrix = [];
   for (let row = 1; row <= matrixHeight; row++) {
     for (let column = 1; column <= matrixWidth; column++) {
       backgroundMatrix = [
         ...backgroundMatrix,
-        { ...emptyStitch, position: { row, column } },
+        { ...crossStitch, position: { row, column } },
+        // { ...leftStitch, position: { row, column } },
+        //   { ...topStitch, position: { row, column } },
+        //   { ...rightStitch, position: { row, column } },
+        //   { ...bottomStitch, position: { row, column } },
       ];
     }
   }
@@ -114,25 +122,10 @@ const addStitchToMatrixData = (
 
 const reducer = (state: MatrixContextState, action) => {
   switch (action.type) {
-    case 'stitchSize':
+    case 'clearMatrix':
       return {
         ...state,
-        stitchType: action.stitchType,
-      };
-    case 'matrixWidth':
-      return {
-        ...state,
-        matrixWidth: action.matrixWidth,
-      };
-    case 'matrixHeight':
-      return {
-        ...state,
-        matrixHeight: action.matrixHeight,
-      };
-    case 'matrixData':
-      return {
-        ...state,
-        matrixData: action.matrixData,
+        matrixData: [],
       };
     case 'addStitch':
       return {

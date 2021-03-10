@@ -1,7 +1,8 @@
 export type ModalContentType =
   | 'ColorPicker'
   | 'StitchPicker'
-  | 'MatrixSettings';
+  | 'MatrixSettings'
+  | 'ClearCanvas';
 
 export type ModalContextState = {
   showModal: boolean;

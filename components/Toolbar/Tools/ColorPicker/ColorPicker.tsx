@@ -16,7 +16,7 @@ const ColorPicker = () => {
     <S.Container>
       <S.AdditionalColorWrapper>
         <S.Circle color="white" onClick={openColorPickerModal}>
-          +
+          <S.IconWrapper> +</S.IconWrapper>
         </S.Circle>
       </S.AdditionalColorWrapper>
       <S.ColorWrapper>

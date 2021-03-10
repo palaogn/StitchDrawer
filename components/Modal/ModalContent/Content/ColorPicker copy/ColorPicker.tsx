@@ -3,7 +3,6 @@ import { SketchPicker } from 'react-color';
 import ReactColorPicker from '@super-effective/react-color-picker';
 
 import { Button } from '../../../../';
-import * as MS from '../../ModalContent.styles';
 import * as S from './ColorPicker.styles';
 import { ToolbarContext, ModalContext } from '../../../../../store';
 
@@ -42,11 +41,8 @@ const ColorPicker = () => {
 
   return (
     <S.Container>
-      <MS.ModalTitle>Choose a color</MS.ModalTitle>
-      <MS.ModalSubTitle>Choose a color you like</MS.ModalSubTitle>
-      <MS.ModalSubTitle>
-        Be careful to choose colors that is possible to buy yarn in
-      </MS.ModalSubTitle>
+      <div>Choose a color you like</div>
+      <div>Be careful to choose colors that is possible to buy yarn in</div>
       <ReactColorPicker
         color={updatedColor}
         showSwatch={true}

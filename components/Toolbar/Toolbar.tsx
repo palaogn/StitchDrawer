@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { ColorPicker, StitchPicker, MatrixSettings } from './Tools';
+import {
+  ColorPicker,
+  StitchPicker,
+  MatrixSettings,
+  ClearCanvas,
+} from './Tools';
 import * as S from './Toolbar.styles';
 
 const Toolbar = () => {
@@ -17,6 +22,10 @@ const Toolbar = () => {
       <S.Tool>
         <S.ToolTitle>Canvas:</S.ToolTitle>
         <MatrixSettings />
+      </S.Tool>
+      <S.Tool>
+        <S.ToolTitle>Clear:</S.ToolTitle>
+        <ClearCanvas />
       </S.Tool>
     </S.Container>
   );
