@@ -14,7 +14,9 @@ export const Container = styled.div`
   background-color: white;
 `;
 
-export const Tool = styled.div``;
+export const Tool = styled.div`
+  margin: 10px 0;
+`;
 
 export const ToolTitle = styled.div`
   color: black;

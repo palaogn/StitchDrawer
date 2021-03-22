@@ -15,9 +15,9 @@ export const Circle = styled.div<{ color: string }>`
   width: ${circleWidth}px;
   height: ${circleHeight}px;
   border-radius: 20px;
-  border: 1px solid #000000;
   background-color: ${({ color }) => color};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-weight: 300;
 `;
 
 export const ColorWrapper = styled.div`

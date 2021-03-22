@@ -1,7 +1,7 @@
 import { useRef, useContext, useState } from 'react';
 
 import { MatrixDataContext, ToolbarContext } from '../../store';
-import { Stitch, StitchType } from '../../types';
+import { Stitch, StitchType, Position } from '../../types';
 import * as S from './DrawingCanvas.styles';
 import { useCanvas } from './useCanvas';
 
@@ -27,21 +27,24 @@ const DrawingCanvas = () => {
     matrixWidth,
   });
 
-  const addStitchToMatrixData = (_row, _column, _stitchType, _color) => {
-    matrixDispatcher({
-      type: 'addStitch',
-      row: _row,
-      column: _column,
-      stitchType: _stitchType,
-      color: _color,
-    });
-  };
-
   const getRowAndColumnFromAxis = (mouseXPos: number, mouseYPos: number) => {
     const divX = Math.ceil(mouseXPos / stitchSize);
     const divY = Math.ceil(mouseYPos / stitchSize);
 
     return { row: divY, column: divX };
+  };
+
+  const isSameStitch = (stitchA: Stitch, stitchB: Stitch) => {
+    return (
+      stitchA.position.row === stitchB.position.row &&
+      stitchA.position.column === stitchB.position.column &&
+      stitchA.color === stitchB.color &&
+      stitchA.stitch === stitchB.stitch
+    );
+  };
+
+  const isStitchNew = (newStitch: Stitch): boolean => {
+    return !matrixData.find((stitch) => isSameStitch(stitch, newStitch));
   };
 
   const onMouseMove = (e, _isMouseDown) => {
@@ -50,12 +53,37 @@ const DrawingCanvas = () => {
       const yPosition = e.clientY - canvasYOffset;
       const { row, column } = getRowAndColumnFromAxis(xPosition, yPosition);
       console.log({ row, column });
-      addStitchToMatrixData(row, column, stitchType, color);
+      const newStitch = {
+        position: { row, column },
+        stitch: stitchType,
+        color,
+      };
+      if (isStitchNew(newStitch)) {
+        matrixDispatcher({
+          type: 'addStitch',
+          stitch: newStitch,
+        });
+      }
+    }
+  };
+
+  const onKeyDown = (e) => {
+    if (e.ctrlKey && e.keyCode === 90) {
+      // ctrl + z = undo
+      console.log('undo');
+      matrixDispatcher({
+        type: 'undo',
+      });
+    } else if (e.crtlKey && e.keyCode === 86) {
+      // ctrl + v = redo
+      matrixDispatcher({
+        type: 'redo',
+      });
     }
   };
 
   return (
-    <S.Container>
+    <S.Container tabIndex="0" onKeyDown={onKeyDown}>
       <S.Canvas
         ref={canvasRef}
         width={matrixWidth * stitchSize}

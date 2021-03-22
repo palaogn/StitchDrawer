@@ -5,10 +5,13 @@ export const Container = styled.div`
   height: 100%;
   text-align: center;
   padding-left: 100px;
+
+  :focus {
+    outline: none;
+  }
 `;
 
 export const Canvas = styled.canvas`
   border: 2px solid #eaeaea;
   margin-top: 20px;
-  // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;

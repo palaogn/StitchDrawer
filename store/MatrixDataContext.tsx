@@ -1,50 +1,16 @@
 import React, { createContext, Context, useReducer } from 'react';
-import { MatrixContextDispatcher, MatrixContextState, Stitch } from '../types';
+import {
+  MatrixContextDispatcher,
+  MatrixContextState,
+  Stitch,
+  HistoryAction,
+  HistoryActionType,
+} from '../types';
+import { initialMatrixData } from './initialMatrixData';
 
-const initialStitchSize = 20;
-const initialMatrixHeight = 50;
-const initialMatrixWidth = 50;
-
-const initialMatrixData: Stitch[] = [
-  { color: 'pink', stitch: 'Cross', position: { row: 1, column: 1 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 1, column: 3 } },
-  { color: 'pink', stitch: 'Cross', position: { row: 1, column: 5 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 3, column: 1 } },
-  { color: 'pink', stitch: 'Cross', position: { row: 3, column: 3 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 3, column: 5 } },
-  //
-  { color: 'pink', stitch: 'Cross', position: { row: 15, column: 14 } },
-  { color: '', stitch: 'Cross', position: { row: 16, column: 15 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 16, column: 13 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 17, column: 12 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 17, column: 16 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 18, column: 17 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 18, column: 11 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 10 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 11 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 12 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 13 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 14 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 15 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 16 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 17 } },
-  { color: '#00807d', stitch: 'Cross', position: { row: 19, column: 18 } },
-  //
-  { color: '#00807d', stitch: 'BottomLine', position: { row: 20, column: 14 } },
-  { color: '#00807d', stitch: 'RightLine', position: { row: 20, column: 14 } },
-  { color: '#00807d', stitch: 'TopLine', position: { row: 20, column: 14 } },
-  { color: '#00807d', stitch: 'LeftLine', position: { row: 20, column: 14 } },
-  {
-    color: '#00807d',
-    stitch: 'VerticalMiddleLine',
-    position: { row: 20, column: 14 },
-  },
-  {
-    color: '#00807d',
-    stitch: 'HorizontalMiddleLine',
-    position: { row: 20, column: 14 },
-  },
-];
+const initialStitchSize = 10;
+const initialMatrixHeight = 100;
+const initialMatrixWidth = 100;
 
 const initiateMatrixBackground = (
   matrixWidth: number,
@@ -80,6 +46,8 @@ const initialData: MatrixContextState = {
     initialMatrixWidth,
     initialMatrixHeight
   ),
+  drawingHistory: [],
+  undoHistory: [],
 };
 
 // Context
@@ -87,56 +55,104 @@ const State: Context<MatrixContextState> = createContext(initialData);
 const Dispatch: Context<MatrixContextDispatcher> = createContext({});
 // : Dispatch<MatrixContextDispatcher>
 
-const addStitchToMatrixData = (
-  matrixData: Stitch[],
-  row,
-  column,
-  stitchType,
-  color
-) => {
+const addStitchToMatrixData = (matrixData: Stitch[], newStitch: Stitch) => {
   let stitchExisted = false;
   let newMatrixData = matrixData.map((stitch) => {
     if (
-      stitch.position.row === row &&
-      stitch.position.column === column &&
-      stitch.stitch === stitchType
+      stitch.position.row === newStitch.position.row &&
+      stitch.position.column === newStitch.position.column &&
+      stitch.stitch === newStitch.stitch
     ) {
       stitchExisted = true;
-      return { ...stitch, color: color };
+      return { ...stitch, color: newStitch.color };
     }
     return stitch;
   });
 
   if (!stitchExisted) {
-    newMatrixData = [
-      ...matrixData,
-      {
-        position: { row: row, column: column },
-        stitch: stitchType,
-        color: color,
-      },
-    ];
+    newMatrixData = [...matrixData, newStitch];
   }
   return newMatrixData;
 };
 
+const isSameStitch = (stitchA: Stitch, stitchB: Stitch) => {
+  return (
+    stitchA.position.row === stitchB.position.row &&
+    stitchA.position.column === stitchB.position.column &&
+    stitchA.color === stitchB.color &&
+    stitchA.stitch === stitchB.stitch
+  );
+};
+
+const undoLastDrawingAction = (
+  matrixData: Stitch[],
+  lastHistoryDrawing: HistoryAction
+): Stitch[] => {
+  switch (lastHistoryDrawing.action) {
+    case 'Stitch':
+      return matrixData.filter(
+        (s) => !isSameStitch(s, lastHistoryDrawing.stitch)
+      );
+  }
+};
+
+const redoLastUndoDrawingAction = (
+  matrixData: Stitch[],
+  lastUndo: HistoryAction
+): Stitch[] => {
+  switch (lastUndo.action) {
+    case 'Stitch':
+      return [...matrixData, lastUndo.stitch];
+  }
+};
+
 const reducer = (state: MatrixContextState, action) => {
+  const lastStitch = state.drawingHistory[state.drawingHistory.length - 1];
   switch (action.type) {
     case 'clearMatrix':
       return {
         ...state,
         matrixData: [],
       };
-    case 'addStitch':
+    case 'undo':
       return {
         ...state,
-        matrixData: addStitchToMatrixData(
-          state.matrixData,
-          action.row,
-          action.column,
-          action.stitchSize,
-          action.color
-        ),
+        matrixData: lastStitch
+          ? undoLastDrawingAction(state.matrixData, lastStitch)
+          : state.matrixData,
+        drawingHistory:
+          state.drawingHistory.length > 0
+            ? state.drawingHistory.slice(0, state.drawingHistory.length - 1)
+            : state.drawingHistory,
+        //     undoHistory: [...state.undoHistory, lastStitch],
+      };
+    case 'redo':
+      return {
+        ...state,
+        matrixData: lastStitch
+          ? redoLastUndoDrawingAction(state.matrixData, lastStitch)
+          : state.matrixData,
+        undoHistory:
+          state.undoHistory.length > 0
+            ? state.undoHistory.slice(0, state.undoHistory.length - 1)
+            : state.undoHistory,
+        drawingHistory: [
+          ...state.drawingHistory,
+          { action: 'Stitch', stitch: action.stitch },
+        ],
+      };
+    case 'addStitch':
+      console.log({
+        drawingHistory: state.drawingHistory,
+        undoHistory: state.undoHistory,
+      });
+      return {
+        ...state,
+        matrixData: addStitchToMatrixData(state.matrixData, action.stitch),
+        drawingHistory: [
+          ...state.drawingHistory,
+          { action: 'Stitch', stitch: action.stitch },
+        ],
       };
     case 'matrixSettings':
       return {

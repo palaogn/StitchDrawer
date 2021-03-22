@@ -12,7 +12,6 @@ export const Rectangle = styled.div<{ color: string }>`
   width: 55px;
   height: 45px;
   border-radius: 10px;
-  border: 1px solid #000000;
   background-color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: auto;
@@ -22,8 +21,9 @@ export const Rectangle = styled.div<{ color: string }>`
   display: flex;
 `;
 
-export const Image = styled.img`
+export const IconWrapper = styled.div`
   transition: all 0.2s ease-in-out;
+  height: 30px;
 
   :hover {
     transform: scale(1.05);
