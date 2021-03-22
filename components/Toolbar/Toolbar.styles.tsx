@@ -1,21 +1,23 @@
 import styled from 'styled-components';
 
-// const borderColor = 'black';
 export const borderColor = '#eaeaea';
 
 export const Container = styled.div`
-  max-width: 100px;
+  position: relative;
+  width: 450px;
   padding: 10px;
-  // #eaeaea
   border-top: 2px solid ${borderColor};
   border-right: 2px solid ${borderColor};
   border-bottom: 2px solid ${borderColor};
-  //  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
   background-color: white;
 `;
 
 export const Tool = styled.div`
-  margin: 10px 0;
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: bottom;
 `;
 
 export const ToolTitle = styled.div`

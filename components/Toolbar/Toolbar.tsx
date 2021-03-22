@@ -16,15 +16,12 @@ const Toolbar = () => {
         <UndoAndRedo />
       </S.Tool>
       <S.Tool>
-        <S.ToolTitle>Stitch:</S.ToolTitle>
         <StitchPicker />
       </S.Tool>
       <S.Tool>
-        <S.ToolTitle>Color:</S.ToolTitle>
         <ColorPicker />
       </S.Tool>
       <S.Tool>
-        <S.ToolTitle>Canvas:</S.ToolTitle>
         <MatrixSettings />
       </S.Tool>
       <S.Tool>
