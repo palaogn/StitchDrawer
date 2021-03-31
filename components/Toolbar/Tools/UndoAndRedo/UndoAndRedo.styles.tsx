@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const circleHeight = 45;
-const circleWidth = 50;
+const circleHeight = 35;
+const circleWidth = 40;
 
 export const Container = styled.div`
   width: 100%;
@@ -20,10 +20,6 @@ export const Rectangle = styled.button<{ disabled: boolean }>`
   background-color: ${({ disabled }) =>
     disabled ? 'rgba(0, 0, 0, 0.2)' : 'white'};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-  justify-content: center;
-  align-items: center;
-  display: flex;
   cursor: pointer;
 `;
 
@@ -43,6 +39,7 @@ export const RedoWrapper = styled.div`
 export const IconWrapper = styled.div`
   transition: all 0.2s ease-in-out;
   width: 20px;
+  margin: 8px auto;
 
   :hover {
     transform: scale(1.1);

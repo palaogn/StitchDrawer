@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import * as S from './ModalContent.styles';
-import { CrossStitch } from '../..';
+import { CrossStitch } from '../../Icon';
 import { ModalContext } from '../../../store';
 import {
   ColorPicker,

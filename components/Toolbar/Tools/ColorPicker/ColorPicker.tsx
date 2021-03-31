@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 
 import * as S from './ColorPicker.styles';
 import { ToolbarContext, ModalContext } from '../../../../store';
+import { StitchType } from '../../../../types';
 
 const ColorPicker = () => {
   const { color } = useContext(ToolbarContext.State);
-  const toolbarDispatcher = useContext(ToolbarContext.Dispatch);
   const modalDispatcher = useContext(ModalContext.Dispatch);
 
   const openColorPickerModal = () => {

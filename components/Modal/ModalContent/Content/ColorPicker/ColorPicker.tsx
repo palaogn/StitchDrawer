@@ -53,7 +53,7 @@ const ColorPicker = () => {
         showHex={true}
         onChange={onColorChange}
       />
-      <Button onClick={onSaveColor} text="Save" />
+      <Button onClick={onSaveColor} text="Use Color" />
     </S.Container>
   );
 };

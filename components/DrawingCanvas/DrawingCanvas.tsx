@@ -70,7 +70,6 @@ const DrawingCanvas = () => {
   const onKeyDown = (e) => {
     if (e.ctrlKey && e.keyCode === 90) {
       // ctrl + z = undo
-      console.log('undo');
       matrixDispatcher({
         type: 'undo',
       });
@@ -91,6 +90,8 @@ const DrawingCanvas = () => {
         onMouseMove={(e) => onMouseMove(e, isMouseDown)}
         onClick={onMouseMove}
         onMouseDown={(e) => {
+          console.log({ e: e, eScreenY: e.screenY, eClientY: e.clientY });
+
           setIsMouseDown(true);
           onMouseMove(e, true);
         }}

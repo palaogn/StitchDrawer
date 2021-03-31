@@ -4,7 +4,7 @@ export const borderColor = '#eaeaea';
 
 export const Container = styled.div`
   position: relative;
-  width: 450px;
+  width: 380px;
   padding: 10px;
   border-top: 2px solid ${borderColor};
   border-right: 2px solid ${borderColor};
@@ -17,7 +17,7 @@ export const Container = styled.div`
 export const Tool = styled.div`
   display: inline-block;
   margin: 0 10px;
-  vertical-align: bottom;
+  vertical-align: top;
 `;
 
 export const ToolTitle = styled.div`

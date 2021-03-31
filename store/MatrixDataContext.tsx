@@ -142,10 +142,6 @@ const reducer = (state: MatrixContextState, action) => {
         ],
       };
     case 'addStitch':
-      console.log({
-        drawingHistory: state.drawingHistory,
-        undoHistory: state.undoHistory,
-      });
       return {
         ...state,
         matrixData: addStitchToMatrixData(state.matrixData, action.stitch),

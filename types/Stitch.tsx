@@ -7,6 +7,8 @@ export type Stitch = {
 export type StitchType =
   | 'None'
   | 'Cross'
+  | 'RightCross'
+  | 'LeftCross'
   | 'TopLine'
   | 'RightLine'
   | 'BottomLine'

@@ -11,7 +11,6 @@ const MyApp = ({ Component, pageProps }) => {
         <S.Container>
           <Head>
             <title>Nálarauga</title>
-            <link rel="icon" href="/nalarauga_logo.svg" />
           </Head>
           <S.Header>
             <TopBar />

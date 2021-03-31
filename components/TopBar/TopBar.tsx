@@ -20,9 +20,13 @@ const TopBar = () => {
   return (
     <Container>
       <IconContainer>
-        <img src="/nalarauga_eye.svg" alt="Nalarauga Logo" height="50px" />
+        <img
+          src="/icons/StitchIcon.png"
+          alt="Stitch Drawer Logo"
+          height="50px"
+        />
       </IconContainer>
-      <Title>Nálarauga</Title>
+      <Title>Stitch Drawer</Title>
     </Container>
   );
 };

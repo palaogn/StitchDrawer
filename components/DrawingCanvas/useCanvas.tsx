@@ -98,6 +98,44 @@ export const useCanvas = ({
     }
   };
 
+  const drawRightCross = ({
+    x,
+    y,
+    color,
+  }: {
+    x: number;
+    y: number;
+    color: string;
+  }) => {
+    if (canvasContext) {
+      canvasContext.strokeStyle = color;
+      canvasContext.lineWidth = 2;
+      canvasContext.beginPath();
+      //  canvasContext.moveTo(x - halfStitchSize, y - halfStitchSize);
+      //  canvasContext.lineTo(x + halfStitchSize, y + halfStitchSize);
+      canvasContext.stroke();
+    }
+  };
+
+  const drawLeftCross = ({
+    x,
+    y,
+    color,
+  }: {
+    x: number;
+    y: number;
+    color: string;
+  }) => {
+    if (canvasContext) {
+      canvasContext.strokeStyle = color;
+      canvasContext.lineWidth = 2;
+      canvasContext.beginPath();
+      canvasContext.moveTo(x + halfStitchSize, y - halfStitchSize);
+      canvasContext.lineTo(x - halfStitchSize, y + halfStitchSize);
+      canvasContext.stroke();
+    }
+  };
+
   const drawTopLine = ({
     x,
     y,
@@ -242,6 +280,10 @@ export const useCanvas = ({
       case 'HorizontalMiddleLine':
         drawHorizontalMiddleLine({ x, y, color });
         break;
+      case 'RightCross':
+        drawRightCross({ x, y, color });
+      case 'LeftCross':
+        drawLeftCross({ x, y, color });
       case 'Cross':
       default:
         drawCross({ x, y, color });
@@ -263,6 +305,8 @@ export const useCanvas = ({
     canvasXOffset,
     canvasYOffset,
     drawCross,
+    drawRightCross,
+    drawLeftCross,
     drawBottomLine,
     drawTopLine,
     drawLeftLine,
