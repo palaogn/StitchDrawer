@@ -4,9 +4,11 @@ import { MatrixDataContext, ToolbarContext } from '../../store';
 import { Stitch, StitchType, Position } from '../../types';
 import * as S from './DrawingCanvas.styles';
 import { useCanvas } from './useCanvas';
+import { useBackgroundCanvas } from './useBackground';
 
 const DrawingCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const backgroundCanvasRef = useRef<HTMLCanvasElement>(null);
   const {
     matrixHeight,
     matrixWidth,
@@ -20,6 +22,14 @@ const DrawingCanvas = () => {
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
   const [canvasXOffset, canvasYOffset] = useCanvas({
     canvasRef,
+    matrixData,
+    matrixBackgroundData,
+    stitchSize,
+    matrixHeight,
+    matrixWidth,
+  });
+  const [] = useBackgroundCanvas({
+    canvasRef: backgroundCanvasRef,
     matrixData,
     matrixBackgroundData,
     stitchSize,
@@ -83,20 +93,27 @@ const DrawingCanvas = () => {
 
   return (
     <S.Container tabIndex="0" onKeyDown={onKeyDown}>
-      <S.Canvas
-        ref={canvasRef}
-        width={matrixWidth * stitchSize}
-        height={matrixHeight * stitchSize}
-        onMouseMove={(e) => onMouseMove(e, isMouseDown)}
-        onClick={onMouseMove}
-        onMouseDown={(e) => {
-          console.log({ e: e, eScreenY: e.screenY, eClientY: e.clientY });
+      <S.CanvasWrapper>
+        <S.BackgroundCanvas
+          ref={backgroundCanvasRef}
+          width={matrixWidth * stitchSize}
+          height={matrixHeight * stitchSize}
+        />
+        <S.Canvas
+          ref={canvasRef}
+          width={matrixWidth * stitchSize}
+          height={matrixHeight * stitchSize}
+          onMouseMove={(e) => onMouseMove(e, isMouseDown)}
+          onClick={onMouseMove}
+          onMouseDown={(e) => {
+            console.log({ e: e, eScreenY: e.screenY, eClientY: e.clientY });
 
-          setIsMouseDown(true);
-          onMouseMove(e, true);
-        }}
-        onMouseUp={() => setIsMouseDown(false)}
-      />
+            setIsMouseDown(true);
+            onMouseMove(e, true);
+          }}
+          onMouseUp={() => setIsMouseDown(false)}
+        />
+      </S.CanvasWrapper>
     </S.Container>
   );
 };

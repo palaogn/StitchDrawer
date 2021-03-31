@@ -52,18 +52,6 @@ export const useCanvas = ({
     clearCanvas(); // we need to clear it between each re render
     console.log('drawing initial matrix');
 
-    matrixBackgroundData.forEach((stitch) => {
-      const { centerX, centerY } = getCenterAxisFromRowAndColumn(
-        stitch.position
-      );
-      drawStitch({
-        x: centerX,
-        y: centerY,
-        color: stitch.color,
-        stitch: stitch.stitch,
-      });
-    });
-
     matrixData.forEach((stitch) => {
       const { centerX, centerY } = getCenterAxisFromRowAndColumn(
         stitch.position

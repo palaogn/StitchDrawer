@@ -10,7 +10,17 @@ export const Container = styled.div`
   }
 `;
 
-export const Canvas = styled.canvas`
-  border: 2px solid #eaeaea;
+export const CanvasWrapper = styled.div`
+  position: relative;
   margin-top: 20px;
+`;
+
+export const Canvas = styled.canvas`
+  position: relative;
+  border: 2px solid #eaeaea;
+`;
+
+export const BackgroundCanvas = styled.canvas`
+  position: absolute;
+  border: 2px solid #eaeaea;
 `;
