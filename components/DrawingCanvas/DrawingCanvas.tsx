@@ -1,7 +1,7 @@
 import { useRef, useContext, useState } from 'react';
 
 import { MatrixDataContext, ToolbarContext } from '../../store';
-import { Stitch, StitchType, Position } from '../../types';
+import { Stitch } from '../../types';
 import * as S from './DrawingCanvas.styles';
 import { useCanvas } from './useCanvas';
 import { useBackgroundCanvas } from './useBackground';
@@ -59,8 +59,8 @@ const DrawingCanvas = () => {
 
   const onMouseMove = (e, _isMouseDown) => {
     if (_isMouseDown) {
-      const xPosition = e.clientX - canvasXOffset;
-      const yPosition = e.clientY - canvasYOffset;
+      const xPosition = e.clientX - Number(canvasXOffset);
+      const yPosition = e.clientY - Number(canvasYOffset);
       const { row, column } = getRowAndColumnFromAxis(xPosition, yPosition);
       console.log({ row, column });
       const newStitch = {
